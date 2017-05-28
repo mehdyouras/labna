@@ -18,7 +18,7 @@ const setup = function() {
     oApp.width = oApp.canvas.width;
     oApp.height = oApp.canvas.height;
 
-    new Flappy( oApp );
+    new Labna( oApp );
 };
 
 setup();
