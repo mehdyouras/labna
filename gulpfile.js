@@ -87,7 +87,7 @@ gulp.task("css", function() {
 });
 // --- Task for js
 gulp.task("js", function() {
-    gulp.src("src/js/**/*.js")
+    gulp.src(["src/js/Labna.js", "src/js/**/*.js"])
         .pipe(sourcemaps.init())
         .pipe(concat("script.js"))
         .pipe(babel())

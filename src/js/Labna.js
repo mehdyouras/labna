@@ -2,7 +2,7 @@
  * Created by mehdy on 28/05/17.
  */
 class Labna {
-    constructor({canvas, context,width, height}) {
+    constructor( {canvas, context,width, height} ) {
         this.canvas = canvas;
         this.context = context;
         this.width = width;
