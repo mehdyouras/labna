@@ -12,7 +12,10 @@ class Labna {
         this.reset();
     }
     reset() {
-        this.bricks = new Bricks(this.width, this.height);
-        bricks.generateBricksArray();
+        this.bricks = new Bricks(this.width, this.height, this.context);
+        window.requestAnimationFrame( this.draw.bind( this ) );
+    }
+    draw() {
+        this.context.clearRect( 0, 0, this.width, this.height );
     }
 }

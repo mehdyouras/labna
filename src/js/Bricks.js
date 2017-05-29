@@ -2,9 +2,10 @@
  * Created by mehdy on 28/05/17.
  */
 class Bricks {
-    constructor(width, height) {
+    constructor(width, height, context) {
         this.width = width;
         this.height = height;
+        this.context = context;
 
         this.bricksOrigin = {
             'x' : 50,
@@ -42,6 +43,11 @@ class Bricks {
             };
             bricks += currentBrick;
         }
-        return bricks;
+        this.bricks = bricks;
+    }
+    draw() {
+        this.bricks.forEach(function(brick) {
+            this.context.fillRect(brick.x, brick.y, this.brickWidth, this.brickHeight)
+        });
     }
 }
