@@ -7,7 +7,9 @@ var gulp = require("gulp"),
     babel = require("gulp-babel"),
     concat = require("gulp-concat"),
     imageResize = require("gulp-image-resize"),
-    rename = require("gulp-rename");
+    rename = require("gulp-rename"),
+    sourcemaps = require('gulp-sourcemaps');
+
 
 // --- Task for images
 // gulp.task("images", function() {
@@ -86,8 +88,10 @@ gulp.task("css", function() {
 // --- Task for js
 gulp.task("js", function() {
     gulp.src("src/js/**/*.js")
+        .pipe(sourcemaps.init())
         .pipe(concat("script.js"))
         .pipe(babel())
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest("assets/js"));
 });
 // --- Watch tasks
