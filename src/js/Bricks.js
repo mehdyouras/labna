@@ -21,6 +21,7 @@ class Bricks {
         for (i = 0; i < 10; i++) {
             let currentBrick;
             currentBrick = {
+                'row' : 3,
                 'x' : (this.bricksOrigin.x)+(i*this.brickWidth),
                 'y' : this.bricksOrigin.y,
                 "health" : 3
@@ -30,6 +31,7 @@ class Bricks {
         for (i = 0; i < 8; i++) {
             let currentBrick;
             currentBrick = {
+                'row' : 2,
                 'x' : (this.bricksOrigin.x)+(i*this.brickWidth)+(this.brickWidth),
                 'y' : (this.bricksOrigin.y)+this.brickHeight,
                 "health" : 2
@@ -39,14 +41,15 @@ class Bricks {
         for (i = 0; i < 6; i++) {
             let currentBrick;
             currentBrick = {
+                'row' : 1,
                 'x' : (this.bricksOrigin.x)+(i*this.brickWidth)+(2*this.brickWidth),
                 'y' : (this.bricksOrigin.y)+(2*this.brickHeight),
                 "health" : 1
             };
             bricks.push(currentBrick);
         }
-
         this.bricks = bricks;
+        console.log(this.bricks);
     }
     draw() {
         let {context, brickWidth, brickHeight} = this;
@@ -63,4 +66,76 @@ class Bricks {
             }
         });
     }
+    handleBrickHit(height, speed, ballX) {
+        let {bricks, brickWidth} = this;
+
+
+        let getBrick = function(rowToFind, x) {
+            return bricks.findIndex(function(obj) {
+                if(obj.row === rowToFind) {
+                    if(obj.x <= x && (obj.x + brickWidth) > x) {
+                        return true;
+                    }
+                } else {
+                    return false
+                }
+            })
+        };
+
+        if(speed < 0) {
+            console.log(height);
+            if(height <= 150 && height > 120) {
+                let brick = getBrick(1, ballX);
+                if(brick === -1 || bricks[brick].health <= 0) {
+                    return false;
+                }
+                bricks[brick].health -= 1;
+                return true;
+            }
+            else if(height <= 120 && height > 90) {
+                let brick = getBrick(2, ballX);
+                if(brick === -1 || bricks[brick].health <= 0) {
+                    return false;
+                }
+                bricks[brick].health -= 1;
+                return true;
+            }
+            else if(height <= 90) {
+                let brick = getBrick(3, ballX);
+                if(brick === -1 || bricks[brick].health <= 0) {
+                    return false;
+                }
+                bricks[brick].health -= 1;
+                return true;
+            }
+        }
+
+        if(speed > 0) {
+            if(height <= 120 && height > 90) {
+                let brick = getBrick(1, ballX);
+                if(brick === -1 || bricks[brick].health <= 0) {
+                    return false;
+                }
+                bricks[brick].health -= 1;
+                return true;
+            }
+            else if(height <= 90 && height > 60) {
+                let brick = getBrick(2, ballX);
+                if(brick === -1 || bricks[brick].health <= 0) {
+                    return false;
+                }
+                bricks[brick].health -= 1;
+                return true;
+            }
+            else if(height <= 60) {
+                let brick = getBrick(3, ballX);
+                if(brick === -1 || bricks[brick].health <= 0) {
+                    return false;
+                }
+                bricks[brick].health -= 1;
+                return true;
+            }
+        }
+    }
+
 }

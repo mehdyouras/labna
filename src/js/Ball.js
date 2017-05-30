@@ -16,6 +16,7 @@ class Ball {
         this.speed = {
             "x": 0,
             "y": 0,
+            "gameSpeed": 5,
         };
     }
     draw() {
@@ -30,20 +31,16 @@ class Ball {
     }
     handleAction() {
         if(!this.isLaunched) {
-            this.speed.y = -4;
-            this.speed.x = Math.random() * (4 + 4) - 4;
+            this.speed.y = -this.speed.gameSpeed;
+            this.speed.x = Math.random() * (this.speed.gameSpeed + this.speed.gameSpeed) - this.speed.gameSpeed;
         }
         this.isLaunched = true;
     }
     changeDirection() {
-        if(this.speed.y === -4) {
-            this.speed.y = 4;
+        if(this.speed.y === -this.speed.gameSpeed) {
+            this.speed.y = this.speed.gameSpeed;
         } else {
-            this.speed.y = -4;
+            this.speed.y = -this.speed.gameSpeed;
         }
-    }
-
-    changeAngle() {
-
     }
 }
