@@ -10,6 +10,8 @@ class Labna {
         this.setup();
     }
     setup() {
+        this.canvas.addEventListener("mousemove", this.handleAction.bind(this));
+        this.canvas.addEventListener("click", this.handleAction.bind(this));
         document.addEventListener( "keydown", this.handleAction.bind( this ) );
         this.reset();
     }
@@ -37,11 +39,15 @@ class Labna {
         if(oEvent.keyCode === 27) {
             this.reset();
         }
-        if(oEvent.keyCode === 32) {
+        if(oEvent.keyCode === 32 || oEvent.type === "click") {
             this.ball.handleAction();
         }
         if(!this.ball.isLaunched) {
             return; // Doesn't allow platform movement if the ball is not launched
+        }
+        if(oEvent.type === "mousemove") {
+            let mouseX = this.getMousePos(oEvent);
+            this.platform.platformOrigin.x = mouseX-(this.platform.platformWidth/2);
         }
         if( oEvent.keyCode === 37 ) {
             this.platform.handleMovement("left")
@@ -77,5 +83,9 @@ class Labna {
                 this.ball.changeDirection();
             }
         }
+    }
+    getMousePos (evt) {
+        let rect = this.canvas.getBoundingClientRect();
+        return evt.clientX - rect.left;
     }
 }

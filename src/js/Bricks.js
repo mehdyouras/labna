@@ -49,7 +49,6 @@ class Bricks {
             bricks.push(currentBrick);
         }
         this.bricks = bricks;
-        console.log(this.bricks);
     }
     draw() {
         let {context, brickWidth, brickHeight} = this;
@@ -83,7 +82,6 @@ class Bricks {
         };
 
         if(speed < 0) {
-            console.log(height);
             if(height <= 150 && height > 120) {
                 let brick = getBrick(1, ballX);
                 if(brick === -1 || bricks[brick].health <= 0) {
