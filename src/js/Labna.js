@@ -51,8 +51,22 @@ class Labna {
         }
     }
     collisionsHandler() {
-        if(this.ball.center.y - this.ball.radius === 0) {
-            this.ball.changeDirection();
+        let ballHitbox = {
+            "top" : this.ball.center.y - this.ball.radius,
+            "bottom" : this.ball.center.y + this.ball.radius,
+            "right" : this.ball.center.x + this.ball.radius,
+            "left" : this.ball.center.x - this.ball.radius,
+            "hitsPlatform" : this.platform.platformOrigin.x <= this.ball.center.x && this.ball.center.x <= this.platform.platformOrigin.x + this.platform.platformWidth,
+        };
+
+        if(ballHitbox.top === 0) {
+            this.ball.changeDirection(); // Hits top of canvas
+        }
+
+        else if(ballHitbox.bottom > this.height-50) {
+            if(ballHitbox.hitsPlatform) {
+                this.ball.changeDirection(); // Hits platform
+            }
         }
     }
 }
