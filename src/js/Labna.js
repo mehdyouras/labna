@@ -11,7 +11,6 @@ class Labna {
     }
     setup() {
         document.addEventListener( "keydown", this.handleAction.bind( this ) );
-        document.addEventListener( "keydown", this.handleAction.bind( this ) );
         this.reset();
     }
     reset() {
@@ -21,29 +20,39 @@ class Labna {
         this.platform = new Platform(this);
         this.ball = new Ball(this);
 
-        this.draw();
+        this.animate();
 
     }
-    draw() {
-        window.requestAnimationFrame( this.draw.bind( this ) );
+    animate() {
+        window.requestAnimationFrame( this.animate.bind( this ) );
         this.context.clearRect(0,0, this.width, this.height);
 
         this.bricks.draw();
         this.platform.draw();
         this.ball.draw();
+
+        this.collisionsHandler();
     }
     handleAction(oEvent) {
-        if(oEvent.keyCode == 32) {
+        if(oEvent.keyCode === 27) {
+            this.reset();
+        }
+        if(oEvent.keyCode === 32) {
             this.ball.handleAction();
         }
         if(!this.ball.isLaunched) {
             return; // Doesn't allow platform movement if the ball is not launched
         }
-        if( oEvent.keyCode == 37 ) {
+        if( oEvent.keyCode === 37 ) {
             this.platform.handleMovement("left")
         }
-        if( oEvent.keyCode == 39 ) {
+        if( oEvent.keyCode === 39 ) {
             this.platform.handleMovement("right")
+        }
+    }
+    collisionsHandler() {
+        if(this.ball.center.y - this.ball.radius === 0) {
+            this.ball.changeDirection();
         }
     }
 }
