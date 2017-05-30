@@ -52,10 +52,8 @@ class Bricks {
         let {context, brickWidth, brickHeight} = this;
         let healthColor = [ "#b07b4b", "#b0ae4b", "#88b04b"];
 
-
         context.strokeStyle = "#000000";
         context.lineWidth   = 1;
-
 
         this.bricks.forEach(function(brick) {
             if(brick.health > 0) {

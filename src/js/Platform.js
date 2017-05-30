@@ -8,18 +8,20 @@ class Platform {
         this.context = context;
 
 
-        this.platformWidth = 70;
+        this.platformWidth = 80;
         this.platformHeight = 15;
         this.platformSpeed = 3;
         this.platformColor = "#ab94ff";
 
         this.platformOrigin = {
             x: (this.width/2)-(this.platformWidth/2),
-            y: 30,
+            y: this.height-50,
         }
     }
     draw() {
         let {context, platformWidth, platformHeight, platformOrigin, platformColor} = this;
-
+        
+        context.fillStyle=platformColor;
+        context.fillRect(platformOrigin.x, platformOrigin.y, platformWidth, platformHeight);
     }
 }

@@ -15,12 +15,17 @@ class Labna {
     reset() {
         this.bricks = new Bricks(this);
         this.bricks.generateBricksArray();
+
+        this.platform = new Platform(this);
+
         this.draw();
 
     }
     draw() {
         window.requestAnimationFrame( this.draw.bind( this ) );
-        context.clearRect(0,0, this.width, this.height);
+        this.context.clearRect(0,0, this.width, this.height);
+
         this.bricks.draw();
+        this.platform.draw();
     }
 }
