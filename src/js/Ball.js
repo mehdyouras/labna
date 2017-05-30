@@ -13,11 +13,15 @@ class Ball {
             x: this.width/2,
             y: this.height-65,
         }
-        this.speed = 0;
+        this.speed = {
+            "x": 0,
+            "y": 0,
+        };
     }
     draw() {
         let {context, center, radius, speed} = this;
-        center.y += speed;
+        center.y += speed.y;
+        center.x += speed.x;
 
         context.beginPath();
         context.arc(center.x,center.y,radius,0,2*Math.PI);
@@ -26,16 +30,20 @@ class Ball {
     }
     handleAction() {
         if(!this.isLaunched) {
-            this.speed = -4;
+            this.speed.y = -4;
+            this.speed.x = Math.random() * (4 + 4) - 4;
         }
         this.isLaunched = true;
     }
     changeDirection() {
-        if(this.speed === -4) {
-            this.speed = 4;
+        if(this.speed.y === -4) {
+            this.speed.y = 4;
         } else {
-            this.speed = -4;
+            this.speed.y = -4;
         }
+    }
+
+    changeAngle() {
 
     }
 }
