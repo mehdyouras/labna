@@ -10,7 +10,7 @@ class Platform {
 
         this.platformWidth = 80;
         this.platformHeight = 15;
-        this.platformSpeed = 3;
+        this.platformSpeed = 15;
         this.platformColor = "#ab94ff";
 
         this.platformOrigin = {
@@ -20,8 +20,18 @@ class Platform {
     }
     draw() {
         let {context, platformWidth, platformHeight, platformOrigin, platformColor} = this;
-        
+
         context.fillStyle=platformColor;
         context.fillRect(platformOrigin.x, platformOrigin.y, platformWidth, platformHeight);
+    }
+    handleMovement(sDirection) {
+        let {context, platformWidth, platformHeight, platformOrigin} = this;
+
+        if(sDirection === "left") {
+            this.platformOrigin.x -= this.platformSpeed;
+        } else {
+            this.platformOrigin.x += this.platformSpeed;
+        }
+
     }
 }
