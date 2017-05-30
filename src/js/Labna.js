@@ -7,15 +7,20 @@ class Labna {
         this.context = context;
         this.width = width;
         this.height = height;
+        this.setup();
     }
     setup() {
         this.reset();
     }
     reset() {
-        this.bricks = new Bricks(this.width, this.height, this.context);
-        window.requestAnimationFrame( this.draw.bind( this ) );
+        this.bricks = new Bricks(this);
+        this.bricks.generateBricksArray();
+        this.draw();
+
     }
     draw() {
-        this.context.clearRect( 0, 0, this.width, this.height );
+        window.requestAnimationFrame( this.draw.bind( this ) );
+        context.clearRect(0,0, this.width, this.height);
+        this.bricks.draw();
     }
 }
