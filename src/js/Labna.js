@@ -7,6 +7,7 @@ class Labna {
         this.context = context;
         this.width = width;
         this.height = height;
+
         this.setup();
     }
     setup() {
@@ -16,17 +17,19 @@ class Labna {
         this.reset();
     }
     reset() {
+        window.cancelAnimationFrame(this.animationRequestId);
         this.bricks = new Bricks(this);
         this.bricks.generateBricksArray();
 
         this.platform = new Platform(this);
         this.ball = new Ball(this);
+        this.rules = new Rules(this);
 
         this.animate();
 
     }
     animate() {
-        window.requestAnimationFrame( this.animate.bind( this ) );
+        this.animationRequestId = window.requestAnimationFrame( this.animate.bind( this ) );
         this.context.clearRect(0,0, this.width, this.height);
 
         this.bricks.draw();
@@ -65,7 +68,7 @@ class Labna {
             "hitsPlatform" : this.platform.platformOrigin.x <= this.ball.center.x && this.ball.center.x <= this.platform.platformOrigin.x + this.platform.platformWidth,
         };
 
-        if(ballHitbox.top === 0) {
+        if(ballHitbox.top < 0) {
             this.ball.changeDirection(); // Hits top of canvas
         }
 
@@ -81,6 +84,7 @@ class Labna {
         } else if(ballHitbox.top <= 155) {
             if(this.bricks.handleBrickHit(ballHitbox.top, this.ball.speed.y, this.ball.center.x)) {
                 this.ball.changeDirection();
+                this.rules.currentScore++; // Increase score if a brick is hit
             }
         }
     }
