@@ -112,5 +112,12 @@ class Bricks {
             }
         }
     }
+    areBricks() {
+
+        function findHealth(obj) {
+            return obj.health > 0;
+        }
+        return this.bricks.find(findHealth);
+    }
 
 }

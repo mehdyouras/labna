@@ -108,7 +108,8 @@ class Labna {
             if(this.bricks.handleBrickHit(ballHitbox.top, ballHitbox.bottom, this.ball.speed.y, this.ball.center.x)) {
                 this.ball.changeDirection();
                 this.rules.currentScore++; // Increase score if a brick is hit
-                this.updateScore();
+                this.updateScore(); // update score if a brick is hit
+                this.win(); // end the game if no more brick
             }
         }
     }
@@ -144,5 +145,12 @@ class Labna {
         this.rules.currentScore = this.rules.score;
 
         this.updateScore();
+    }
+
+    win() {
+        console.log(this.bricks.areBricks());
+        if(!this.bricks.areBricks()) {
+            this.reset();
+        }
     }
 }
