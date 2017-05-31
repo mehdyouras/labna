@@ -16,7 +16,7 @@ class Ball {
         this.speed = {
             "x": 0,
             "y": 0,
-            "gameSpeed": 5,
+            "gameSpeed": 6,
         };
     }
     draw() {
