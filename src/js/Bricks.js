@@ -65,7 +65,7 @@ class Bricks {
             }
         });
     }
-    handleBrickHit(height, speed, ballX) {
+    handleBrickHit(topY, bottomY, speed, ballX) {
         let {bricks, brickWidth} = this;
 
 
@@ -75,63 +75,40 @@ class Bricks {
                     if(obj.x <= x && (obj.x + brickWidth) > x) {
                         return true;
                     }
-                } else {
-                    return false
                 }
             })
         };
 
-        if(speed < 0) {
-            if(height <= 150 && height > 120) {
-                let brick = getBrick(1, ballX);
-                if(brick === -1 || bricks[brick].health <= 0) {
-                    return false;
-                }
-                bricks[brick].health -= 1;
-                return true;
+        let hitBrick = function(row) {
+            let brick = getBrick(row, ballX);
+            if(brick === -1 || bricks[brick].health <= 0) {
+                return false;
             }
-            else if(height <= 120 && height > 90) {
-                let brick = getBrick(2, ballX);
-                if(brick === -1 || bricks[brick].health <= 0) {
-                    return false;
-                }
-                bricks[brick].health -= 1;
-                return true;
+            bricks[brick].health -= 1;
+            return true;
+        }
+
+        if(speed < 0) { // If ball going up
+            if(topY <= 150 && topY > 120) {
+                return hitBrick(1);
             }
-            else if(height <= 90) {
-                let brick = getBrick(3, ballX);
-                if(brick === -1 || bricks[brick].health <= 0) {
-                    return false;
-                }
-                bricks[brick].health -= 1;
-                return true;
+            else if(topY <= 120 && topY > 90) {
+                return hitBrick(2);
+            }
+            else if(topY <= 90) {
+                return hitBrick(3);
             }
         }
 
-        if(speed > 0) {
-            if(height >= 120 && height < 150) {
-                let brick = getBrick(1, ballX);
-                if(brick === -1 || bricks[brick].health <= 0) {
-                    return false;
-                }
-                bricks[brick].health -= 1;
-                return true;
+        if(speed > 0) { // If ball going down
+            if(bottomY >= 120 && bottomY < 150) {
+                return hitBrick(1);
             }
-            else if(height >= 90 && height < 120) {
-                let brick = getBrick(2, ballX);
-                if(brick === -1 || bricks[brick].health <= 0) {
-                    return false;
-                }
-                bricks[brick].health -= 1;
-                return true;
+            else if(bottomY >= 90 && bottomY < 120) {
+                return hitBrick(2);
             }
-            else if(height >= 60 && height < 90) {
-                let brick = getBrick(3, ballX);
-                if(brick === -1 || bricks[brick].health <= 0) {
-                    return false;
-                }
-                bricks[brick].health -= 1;
-                return true;
+            else if(bottomY >= 60 && bottomY < 90) {
+                return hitBrick(3);
             }
         }
     }

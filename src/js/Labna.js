@@ -82,7 +82,7 @@ class Labna {
         else if (ballHitbox.left < 0) {
             this.ball.speed.x = -this.ball.speed.x; // Hits left
         } else if(ballHitbox.top <= 155) {
-            if(this.bricks.handleBrickHit(ballHitbox.top, this.ball.speed.y, this.ball.center.x)) {
+            if(this.bricks.handleBrickHit(ballHitbox.top, ballHitbox.bottom, this.ball.speed.y, this.ball.center.x)) {
                 this.ball.changeDirection();
                 this.rules.currentScore++; // Increase score if a brick is hit
             }
