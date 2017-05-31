@@ -109,7 +109,7 @@ class Bricks {
         }
 
         if(speed > 0) {
-            if(height <= 120 && height > 90) {
+            if(height >= 120 && height < 150) {
                 let brick = getBrick(1, ballX);
                 if(brick === -1 || bricks[brick].health <= 0) {
                     return false;
@@ -117,7 +117,7 @@ class Bricks {
                 bricks[brick].health -= 1;
                 return true;
             }
-            else if(height <= 90 && height > 60) {
+            else if(height >= 90 && height < 120) {
                 let brick = getBrick(2, ballX);
                 if(brick === -1 || bricks[brick].health <= 0) {
                     return false;
@@ -125,7 +125,7 @@ class Bricks {
                 bricks[brick].health -= 1;
                 return true;
             }
-            else if(height <= 60) {
+            else if(height >= 60 && height < 90) {
                 let brick = getBrick(3, ballX);
                 if(brick === -1 || bricks[brick].health <= 0) {
                     return false;

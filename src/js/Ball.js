@@ -18,6 +18,7 @@ class Ball {
             "y": 0,
             "gameSpeed": 6,
         };
+
     }
     draw() {
         let {context, center, radius, speed} = this;
