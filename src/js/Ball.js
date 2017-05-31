@@ -12,7 +12,7 @@ class Ball {
         this.center = {
             x: this.width/2,
             y: this.height-65,
-        }
+        };
         this.speed = {
             "x": 0,
             "y": 0,
